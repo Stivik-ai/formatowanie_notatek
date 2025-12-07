@@ -1,67 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const inputArea = document.getElementById('inputArea');
-    const lineLengthInput = document.getElementById('lineLength');
+    const outputArea = document.getElementById('outputArea');
+    const copyBtn = document.getElementById('copyAll');
+
+    inputArea.value =
+        "To jest długi tekst z nadmiarowymi spacjami,\n" +
+        "inteligentnymi 'cudzysłowami' i twardymi spacjami.\n" +
+        "Musimy go wyczyścić i zamienić entery na \\n.";
+
+    formatText();
 
     inputArea.addEventListener('input', formatText);
-    lineLengthInput.addEventListener('input', formatText);
 
+    function formatText() {
+        let text = inputArea.value;
 
-    inputArea.value = "To jest długi tekst z nadmiarowymi   spacjami, \t inteligentnymi 'cudzysłowami' i twardymi spacjami. Musimy go wyczyścić i złamać na krótkie linie dla zegarka.";
-    formatText();
+        text = text.replace(/[\u2018\u2019]/g, "'");
+        text = text.replace(/[\u201C\u201D]/g, '"');
+        text = text.replace(/\u00A0|\t/g, ' ');
+
+       
+        text = text
+            .split('\n')
+            .map(line => line.replace(/\s+/g, ' ').trim())
+            .join('\n');
+
+       
+        const oneLine = text.replace(/\n/g, '\\n');
+
+        outputArea.value = oneLine;
+    }
+
+    copyBtn.addEventListener('click', function () {
+        outputArea.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Skopiowano!';
+        setTimeout(() => (copyBtn.textContent = 'Kopiuj całość'), 1200);
+    });
 });
 
-function formatText() {
-    const inputElement = document.getElementById('inputArea');
-    const outputElement = document.getElementById('outputArea');
-    const maxLen = parseInt(document.getElementById('lineLength').value, 10) || 35;
-    
-    let text = inputElement.value;
-
-    text = text.replace(/[\u2018\u2019]/g, "'");
-    text = text.replace(/[\u201C\u201D]/g, '"');
-    text = text.replace(/\u00A0|\t/g, ' '); 
-    
-    let cleanedText = text.replace(/\s+/g, ' ').trim();
-    
-    if (cleanedText === "") {
-        outputElement.value = "";
-        return;
-    }
-    
-    let formattedText = '';
-    let currentLine = '';
-    
-    const words = cleanedText.split(' ');
-    
-    words.forEach(word => {
-        if (word.length === 0) return; 
-
-        let potentialNewLength = (currentLine.length > 0 ? (currentLine + ' ' + word).length : word.length);
-
-        if (potentialNewLength > maxLen && currentLine.length > 0) {
-            formattedText += currentLine + '\n';
-            currentLine = word;
-        } else {
-            if (currentLine.length > 0) {
-                currentLine += ' ' + word;
-            } else {
-                currentLine = word;
-            }
-        }
-    });
-    
-    formattedText += currentLine;
-    
-    outputElement.value = formattedText;
-    
-    
-}
 document.addEventListener("DOMContentLoaded", function () {
     const steve = document.getElementById("drifting-steve");
 
     let x = 50;
     let y = 50;
-    let vx = 0.03; // prędkość w % viewportu na ms (wolniej)
+    let vx = 0.03;
     let vy = -0.02;
 
     function randomDirection() {
