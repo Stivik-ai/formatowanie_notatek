@@ -14,13 +14,6 @@
                 złamie linie, aby idealnie pasowały do małego ekranu zegarka.
             </p>
 
-            <div class="controls">
-                <label for="lineLength"
-                    >Maksymalna długość linii (znaków):</label
-                >
-                <input type="number" id="lineLength" value="35" min="10" />
-            </div>
-
             <label for="inputArea">Tekst wejściowy:</label>
             <textarea
                 id="inputArea"
@@ -35,6 +28,9 @@
                 readonly
                 placeholder="Sformatowany tekst pojawi się tutaj..."
             ></textarea>
+            <label for="outputArea">Wynik:</label>
+            <textarea id="outputArea" readonly></textarea>
+            <button id="copyAll" type="button">Kopiuj</button>
         </main>
 
         <div id="drifting-steve"></div>
