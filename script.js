@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputArea = document.getElementById('inputArea');
     const outputArea = document.getElementById('outputArea');
     const copyBtn = document.getElementById('copyAll');
+    const steve = document.getElementById('drifting-steve');
 
     inputArea.value =
         "To jest długi tekst z nadmiarowymi spacjami,\n" +
@@ -9,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
         "Musimy go wyczyścić i zamienić entery na \\n.";
 
     formatText();
-
     inputArea.addEventListener('input', formatText);
 
     function formatText() {
@@ -19,16 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
         text = text.replace(/[\u201C\u201D]/g, '"');
         text = text.replace(/\u00A0|\t/g, ' ');
 
-       
         text = text
             .split('\n')
             .map(line => line.replace(/\s+/g, ' ').trim())
             .join('\n');
 
-       
         const oneLine = text.replace(/\n/g, '\\n');
-
         outputArea.value = oneLine;
+
+        if (/troll/i.test(text)) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
     }
 
     copyBtn.addEventListener('click', function () {
@@ -37,10 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         copyBtn.textContent = 'Skopiowano!';
         setTimeout(() => (copyBtn.textContent = 'Kopiuj całość'), 1200);
     });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const steve = document.getElementById("drifting-steve");
 
     let x = 50;
     let y = 50;
@@ -49,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function randomDirection() {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 0.02 + Math.random() * 0.03; 
+        const speed = 0.02 + Math.random() * 0.03;
         vx = Math.cos(angle) * speed;
         vy = Math.sin(angle) * speed;
     }
@@ -81,10 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     randomPosition();
     randomDirection();
-
     setInterval(randomDirection, 4000 + Math.random() * 4000);
-
     requestAnimationFrame(tick);
 });
-
-
