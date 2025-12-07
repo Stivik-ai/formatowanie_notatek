@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function randomDirection() {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 0.02 + Math.random() * 0.03; // zakres prędkości
+        const speed = 0.02 + Math.random() * 0.03; 
         vx = Math.cos(angle) * speed;
         vy = Math.sin(angle) * speed;
     }
@@ -86,4 +86,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     requestAnimationFrame(tick);
 });
+
 
