@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Formatter Notatek Minecraft Edition</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <h2>Note Formatter</h2>
+            <p class="description">
+                Wklej tekst. Skrypt usunie formatowanie, nadmiarowe spacje i
+                złamie linie, aby idealnie pasowały do małego ekranu zegarka.
+            </p>
+
+            <div class="controls">
+                <label for="lineLength"
+                    >Maksymalna długość linii (znaków):</label
+                >
+                <input type="number" id="lineLength" value="35" min="10" />
+            </div>
+
+            <label for="inputArea">Tekst wejściowy:</label>
+            <textarea
+                id="inputArea"
+                placeholder="Wklej tutaj niezaformatowany tekst."
+            ></textarea>
+
+            <label for="outputArea"
+                >Tekst sformatowany (gotowy do wklejenia w Zepp):</label
+            >
+            <textarea
+                id="outputArea"
+                readonly
+                placeholder="Sformatowany tekst pojawi się tutaj..."
+            ></textarea>
+        </main>
+
+        <div id="drifting-steve"></div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
